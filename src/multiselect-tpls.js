@@ -80,8 +80,12 @@ angular.module('ui.multiselect', [
           scope.$watch(function () {
             return parsedResult.source(originalScope);
           }, function (newVal) {
-            if (angular.isDefined(newVal))
+            if (angular.isDefined(newVal)) {
               parseModel();
+              if (angular.isDefined(modelCtrl.$modelValue)) {
+                markChecked(modelCtrl.$modelValue);
+              }
+            }
           }, true);
 
           //watch model change
