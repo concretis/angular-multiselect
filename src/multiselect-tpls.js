@@ -43,6 +43,7 @@ angular.module('ui.multiselect', [
             scope = originalScope.$new(),
             changeHandler = attrs.change || angular.noop;
 
+          scope.model = null;
           scope.items = [];
           scope.header = 'Select';
           scope.multiple = isMultiple;
@@ -92,6 +93,7 @@ angular.module('ui.multiselect', [
           scope.$watch(function () {
             return modelCtrl.$modelValue;
           }, function (newVal, oldVal) {
+            scope.model = newVal;
             //when directive initialize, newVal usually undefined. Also, if model value already set in the controller
             //for preselected list then we need to mark checked in our scope item. But we don't want to do this every time
             //model changes. We need to do this only if it is done outside directive scope, from controller, for example.
