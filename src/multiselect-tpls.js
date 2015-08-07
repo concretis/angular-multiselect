@@ -195,14 +195,22 @@ angular.module('ui.multiselect', [
                 }
               });
             } else {
+              var found = [];
               angular.forEach(scope.items, function (item) {
                 item.checked = false;
                 angular.forEach(newVal, function (i) {
                   if (angular.equals(item.model, i)) {
                     item.checked = true;
+                    found.push(i);
                   }
                 });
               });
+              // remove unfound items
+              for(var i=0; i<newVal.length; i++) {
+                if(found.indexOf(newVal[i]) < 0) {
+                  newVal.splice(i--, 1);
+                }
+              }
             }
           }
 
